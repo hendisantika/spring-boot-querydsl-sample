@@ -1,0 +1,21 @@
+### Get all teams
+GET http://localhost:8080/v1/dashboard
+
+[
+  {
+    "id": 1,
+    "name": "First Team",
+    "memberCount": 4,
+    "milestoneCount": 0
+  },
+  {
+    "id": 2,
+    "name": "Second Team",
+    "memberCount": 3,
+    "milestoneCount": 0
+  }
+]
+
+### Get all teams
+GET http://localhost:8080/v2/dashboard
+
