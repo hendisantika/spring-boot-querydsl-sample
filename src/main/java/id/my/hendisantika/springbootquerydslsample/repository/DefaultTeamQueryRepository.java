@@ -1,9 +1,11 @@
 package id.my.hendisantika.springbootquerydslsample.repository;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import id.my.hendisantika.springbootquerydslsample.model.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -57,5 +59,15 @@ public class DefaultTeamQueryRepository {
                 )
                 .fetch();
     }
+
+    private BooleanExpression nameLike(String searchText) {
+        if (!StringUtils.hasText(searchText)) {
+            return null;
+        }
+
+        QMember memberTable = new QMember("member");
+        return memberTable.name.containsIgnoreCase(searchText);
+    }
+
 
 }
