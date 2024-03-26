@@ -1,8 +1,11 @@
 package id.my.hendisantika.springbootquerydslsample.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import id.my.hendisantika.springbootquerydslsample.model.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,4 +23,20 @@ public class DefaultTeamQueryRepository {
 
     private final JPAQueryFactory queryFactory;
 
+    public List<MemberResponse> findMembersByTeamId(long teamId) {
+        QMember memberTable = new QMember("member");
+
+        return queryFactory
+                .select(
+                        new QMemberResponse(
+                                memberTable.id,
+                                memberTable.name
+                        )
+                )
+                .from(memberTable)
+                .where(
+                        memberTable.team.id.eq(teamId)
+                )
+                .fetch();
+    }
 }
