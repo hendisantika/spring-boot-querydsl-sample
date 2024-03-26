@@ -1,6 +1,7 @@
 package id.my.hendisantika.springbootquerydslsample.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import id.my.hendisantika.springbootquerydslsample.model.MemberResponse;
 import lombok.RequiredArgsConstructor;
@@ -88,5 +89,12 @@ public class DefaultTeamQueryRepository {
                 .fetch();
 
         return PageableExecutionUtils.getPage(members, pageable, () -> countQuery().fetchOne());
+    }
+
+    private JPAQuery<Long> countQuery() {
+        QMember memberTable = new QMember("member");
+        return queryFactory
+                .select(memberTable.count())
+                .from(memberTable);
     }
 }
