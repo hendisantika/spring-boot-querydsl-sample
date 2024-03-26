@@ -39,4 +39,23 @@ public class DefaultTeamQueryRepository {
                 )
                 .fetch();
     }
+
+    public List<MemberResponse> searchMembersByTeamId(long teamId, String searchText) {
+        QMember memberTable = new QMember("member");
+
+        return queryFactory
+                .select(
+                        new QMemberResponse(
+                                memberTable.id,
+                                memberTable.name
+                        )
+                )
+                .from(memberTable)
+                .where(
+                        memberTable.team.id.eq(teamId),
+                        nameLike(searchText)
+                )
+                .fetch();
+    }
+
 }
