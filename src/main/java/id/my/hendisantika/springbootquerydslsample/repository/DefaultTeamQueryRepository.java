@@ -4,6 +4,9 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import id.my.hendisantika.springbootquerydslsample.model.MemberResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -69,5 +72,21 @@ public class DefaultTeamQueryRepository {
         return memberTable.name.containsIgnoreCase(searchText);
     }
 
+    public Page<MemberResponse> members(Pageable pageable) {
+        QMember memberTable = new QMember("member");
 
+        List<MemberResponse> members = queryFactory
+                .select(
+                        new QMemberResponse(
+                                memberTable.id,
+                                memberTable.name
+                        )
+                )
+                .from(memberTable)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        return PageableExecutionUtils.getPage(members, pageable, () -> countQuery().fetchOne());
+    }
 }
