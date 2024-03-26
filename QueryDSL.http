@@ -19,3 +19,107 @@ GET http://localhost:8080/v1/dashboard
 ### Get all teams
 GET http://localhost:8080/v2/dashboard
 
+### Get team member
+GET http://localhost:8080/v1/teams/1/members
+
+[
+  {
+    "id": 1,
+    "name": "Yuji"
+  },
+  {
+    "id": 2,
+    "name": "Megumi"
+  },
+  {
+    "id": 3,
+    "name": "Gojo"
+  },
+  {
+    "id": 4,
+    "name": "Nanami"
+  }
+]
+
+###
+GET http://localhost:8080/v2/teams/1/members
+
+[
+  {
+    "id": 1,
+    "name": "Yuji"
+  },
+  {
+    "id": 2,
+    "name": "Megumi"
+  },
+  {
+    "id": 3,
+    "name": "Gojo"
+  },
+  {
+    "id": 4,
+    "name": "Nanami"
+  }
+]
+
+### Get all  members
+GET http://localhost:8080/v3/members
+
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "Yuji"
+    },
+    {
+      "id": 2,
+      "name": "Megumi"
+    },
+    {
+      "id": 3,
+      "name": "Gojo"
+    },
+    {
+      "id": 4,
+      "name": "Nanami"
+    },
+    {
+      "id": 5,
+      "name": "Todo"
+    },
+    {
+      "id": 6,
+      "name": "Mei"
+    },
+    {
+      "id": 7,
+      "name": "Sukuna"
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 20,
+    "sort": {
+      "empty": true,
+      "unsorted": true,
+      "sorted": false
+    },
+    "offset": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": true,
+  "totalElements": 7,
+  "totalPages": 1,
+  "first": true,
+  "size": 20,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "unsorted": true,
+    "sorted": false
+  },
+  "numberOfElements": 7,
+  "empty": false
+}
