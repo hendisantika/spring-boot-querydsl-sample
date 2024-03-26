@@ -34,4 +34,12 @@ class DashboardController {
                 .map(team -> new TeamResponse(team.getId(), team.getName(), team.getMembers().size(), team.getMilestones().size()))
                 .toList();
     }
+
+    @GetMapping("/v2/dashboard")
+    public List<TeamResponse> dashboard2() {
+        List<Team> all = teamRepository.findAll();
+        return all.stream()
+                .map(team -> new TeamResponse(team.getId(), team.getName(), team.getMembers().size(), team.getMilestones().size()))
+                .toList();
+    }
 }
