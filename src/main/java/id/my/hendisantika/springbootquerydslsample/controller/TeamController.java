@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -30,5 +31,10 @@ class TeamController {
     @GetMapping("/v1/teams/{teamId}/members")
     public List<MemberResponse> members(@PathVariable long teamId) {
         return query.findMembersByTeamId(teamId);
+    }
+
+    @GetMapping("/v2/teams/{teamId}/members")
+    public List<MemberResponse> searchMembers(@PathVariable long teamId, @RequestParam(required = false) String searchText) {
+        return query.searchMembersByTeamId(teamId, searchText);
     }
 }
